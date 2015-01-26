@@ -1,0 +1,50 @@
+<html>
+<body>
+
+    <td valign="top" align="center">
+	<div class="testbox1">
+  	  	<h1>Submitter</h1><hr>
+
+		<table align="center">
+			<th width="10px" align="center">
+				<a href="javascript:setstart()" class="button1">Start Time</a>
+				<span id="starttime">00:00 </span> sec
+			</th>
+			<th width="10px" align="center">
+			   	<a href="javascript:setend()" class="button1">End Time</a>
+				<span id="endtime">00:00</span> sec
+			</th>
+			<tr>
+				<td colspan="2" align="center">
+				   	<a href="javascript:resettime()" class="button3">Reset Time</a>					
+				</td>
+			</tr>
+		</table>
+		<table align="center">
+			<h3 align="center">Categories</h3>
+			<th align="left">
+				<input type="checkbox" name="nudity" value="nudity">Nudity</input><br>
+				<input type="checkbox" name="violence" value="violence">Violence</input><br>
+			</th>
+			<th align="left">
+				<input type="checkbox" name="adult" value="adult">Adult</input><br>
+				<input type="checkbox" name="language" value="language">Language</input><br>
+			</th>
+		</table>
+		<form method="post" name="insert" id="form1" action="insert.php">
+		<table align="center">
+			<th align="center">
+				  <textarea type="text" name="desc" id="desc" rows="3" placeholder="Description"></textarea><br>
+				</form>
+			</th>
+			<tr align="center"><td>
+			    	<a href="javascript:;" class="button2" onClick="document.getElementById('form1').submit();">Submit time stamp</a>
+			 <!--	<button id="submit" onclick="">SUBMIT</button> -->
+			</td></tr>
+		</table>
+		</form>
+	</div>
+    </td>
+
+</body>
+</html>

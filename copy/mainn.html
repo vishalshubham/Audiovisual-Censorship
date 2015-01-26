@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+	div#video_player_box{ width:510px; background:#000; margin:0px auto;}
+	div#video_controls_bar{ background: #000; padding:10px; color:#CCC;}
+</style>
+
+<script>
+
+    var video, play, seekslider, curtimetext, durtimetext;
+    
+    function initializePlayer() {
+
+        play = document.getElementById("play");
+	seekslider = document.getElementById("seekslider");
+	curtimetext = document.getElementById("curtimetext");
+	durtimetext = document.getElementById("durtimetext");
+
+	//Event listeners
+	seekslider.addEventListener("change",vidSeek,false);
+	video.addEventListener("timeupdate",seektimeupdate,false);
+	video.addEventListener("timeupdate",operations,false);
+	nud.addEventListener("onclick",refresh,false);
+
+    }
+
+    window.onload = initializePlayer;
+		
+    function vidplay() {
+
+	if (video.paused) {
+        	video.play();
+          	play.textContent = "¦¦";
+       	} 
+	else {
+          	video.pause();
+          	play.textContent = "? ";
+       	}
+
+    }
+
+    function restart() {
+        video.currentTime = 0;
+    }
+
+    function skip(value) {
+		video.currentTime += value;
+    }
+
+    function endvideo() {
+		video.currentTime = video.duration - 10;	
+    }
+
+    function vidSeek(){
+		var seekto = video.duration * (seekslider.value / 100);
+		video.currentTime = seekto;
+    }
+
+    function operations(){
+
+		//if (video.currentTime > 5 && video.currentTime < 25){
+		if (video.currentTime > 5 && video.currentTime < 25 && cnudity.checked == true){
+	    	video.currentTime = 26;
+		}
+
+		if (video.currentTime > 30 && video.currentTime < 40){
+	    	video.muted = true;
+		}
+		else{
+	    	video.muted = false;
+		}
+    }
+
+    function seektimeupdate(){
+		var nt = video.currentTime * (100 / video.duration);
+		seekslider.value = nt;
+		var curmins = Math.floor(video.currentTime / 60);
+		var cursecs = Math.floor(video.currentTime - curmins * 60);
+		var durmins = Math.floor(video.duration / 60);
+		var dursecs = Math.floor(video.duration - durmins * 60);
+		if(cursecs < 10){ cursecs = "0"+cursecs; }
+		if(dursecs < 10){ dursecs = "0"+dursecs; }
+		if(curmins < 10){ curmins = "0"+curmins; }
+		if(durmins < 10){ durmins = "0"+durmins; }
+		curtimetext.innerHTML = curmins+":"+cursecs;
+		durtimetext.innerHTML = durmins+":"+dursecs;
+    }
+
+    function setstart(){
+	if((endtime.innerHTML >= video.currentTime) || (endtime.innerHTML == "00:00")){
+    		starttime.innerHTML = video.currentTime;
+	}
+    }
+
+    function setend(){
+	if(starttime.innerHTML <= video.currentTime){
+    		endtime.innerHTML = video.currentTime;
+	}
+    }    
+
+</script>
+
+
+
+<table style="width:100%">
+  <tr>
+    <th colspan="3">
+	<img src="logo.jpg" alt="logo">
+    </th>
+  </tr>  
+  <tr>
+    <td width="50">
+	<div id="video_player_box">
+	<video id="video1" width="510" height="280">
+	    <source src="demo.mp4" type="video/mp4" />
+  	</video>
+
+  	<div id="video_controls_bar">
+    	<button id="restart" onclick="restart()">¦</button> 
+    	<button id="rew" onclick="skip(-10)">??</button>
+    	<button id="play" onclick="vidplay()">?</button>
+    	<button id="fastFwd" onclick="skip(10)">??</button>
+    	<button id="Dopc" onclick="endvideo()">?¦</button>
+    	<input id="seekslider" type="range" min="0" max="100" value="0" step="1">
+    	<span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span>
+  	</div>
+	</div>
+    </td> 
+  </tr>
+</table>
